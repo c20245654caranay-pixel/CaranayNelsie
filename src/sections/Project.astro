@@ -1,0 +1,133 @@
+---
+---
+
+<section id="coffee" class="px-5 py-16 bg-purple-50 dark:bg-slate-950">
+
+    <div class="max-w-5xl mx-auto">
+
+        <h2 class="text-3xl font-bold text-purple-800 dark:text-purple-300 text-center">
+            My Coffee Shop Project
+        </h2>
+
+        <p class="text-center text-gray-600 dark:text-gray-400 mt-3 mb-8">
+           
+        </p>
+
+        <div id="coffeeDemoCard"
+            class="max-w-md mx-auto p-6 rounded-2xl bg-white dark:bg-slate-900 shadow-lg border border-purple-200 dark:border-slate-700">
+
+            <div class="flex justify-between items-center">
+                <span id="demoStockStatus"
+                    class="text-xs font-bold text-emerald-600 bg-emerald-100 px-3 py-2 rounded-full">
+                    IN STOCK
+                </span>
+
+                <span class="text-sm text-purple-500">
+                    Stock: <span id="demoStock">48</span> pcs
+                </span>
+            </div>
+
+            <div id="coffeeCup" class="text-7xl text-center my-6">
+                ☕
+            </div>
+
+            <h3 id="coffeeName"
+                class="text-xl font-bold text-purple-800 dark:text-purple-300 text-center">
+                3-in-1 Coffee Sachet
+            </h3>
+
+            <p class="text-sm text-center text-gray-500 mt-2">
+                Original Flavor (28g)
+            </p>
+
+            <p id="coffeePrice"
+                class="text-3xl font-black text-purple-600 dark:text-purple-400 text-center my-5">
+                ₱10.00
+            </p>
+
+            <button id="coffeeDemoButton"
+                class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl">
+                + Add Coffee to Cart
+            </button>
+
+            <p class="text-center text-sm mt-4 text-gray-500 dark:text-gray-400">
+                Cart Quantity:
+                <span id="demoCartQuantity">0</span>
+            </p>
+
+            <p id="coffeeDemoMessage" class="text-center text-sm mt-3"></p>
+
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3 mt-7">
+
+            <button id="coffeeAnimation"
+                class="bg-pink-600 text-white px-4 py-3 rounded-xl">
+                Animate Coffee
+            </button>
+
+            <button id="coffeePriceAnimation"
+                class="bg-violet-600 text-white px-4 py-3 rounded-xl">
+                Animate Price
+            </button>
+
+            <button id="coffeeReplay"
+                class="bg-slate-800 text-white px-4 py-3 rounded-xl">
+                ↻ Replay All
+            </button>
+
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+
+            <article class="demo-card p-5 rounded-xl bg-white dark:bg-slate-900 border border-purple-300">
+                <h3 class="font-bold text-purple-600">1. ScrollTrigger</h3>
+                <p class="text-sm mt-2 text-gray-500">Reveal the coffee product while scrolling.</p>
+                <button data-demo="scroll" class="demo-button mt-4 w-full border border-purple-500 rounded-lg p-2">View Demo</button>
+            </article>
+
+            <article class="demo-card p-5 rounded-xl bg-white dark:bg-slate-900 border border-violet-300">
+                <h3 class="font-bold text-violet-600">2. Text Animation</h3>
+                <p class="text-sm mt-2 text-gray-500">Animate the coffee product name.</p>
+                <button data-demo="text" class="demo-button mt-4 w-full border border-violet-500 rounded-lg p-2">View Demo</button>
+            </article>
+
+            <article class="demo-card p-5 rounded-xl bg-white dark:bg-slate-900 border border-pink-300">
+                <h3 class="font-bold text-pink-600">3. Product Bounce</h3>
+                <p class="text-sm mt-2 text-gray-500">Make the coffee cup bounce.</p>
+                <button data-demo="bounce" class="demo-button mt-4 w-full border border-pink-500 rounded-lg p-2">View Demo</button>
+            </article>
+
+            <article class="demo-card p-5 rounded-xl bg-white dark:bg-slate-900 border border-emerald-300">
+                <h3 class="font-bold text-emerald-600">4. Price Animation</h3>
+                <p class="text-sm mt-2 text-gray-500">Highlight the coffee price.</p>
+                <button data-demo="price" class="demo-button mt-4 w-full border border-emerald-500 rounded-lg p-2">View Demo</button>
+            </article>
+
+            <article class="demo-card p-5 rounded-xl bg-white dark:bg-slate-900 border border-orange-300">
+                <h3 class="font-bold text-orange-600">5. Button Feedback</h3>
+                <p class="text-sm mt-2 text-gray-500">Animate the Add to Cart button.</p>
+                <button data-demo="button" class="demo-button mt-4 w-full border border-orange-500 rounded-lg p-2">View Demo</button>
+            </article>
+
+            <article class="demo-card p-5 rounded-xl bg-white dark:bg-slate-900 border border-cyan-300">
+                <h3 class="font-bold text-cyan-600">6. Card Entrance</h3>
+                <p class="text-sm mt-2 text-gray-500">Slide the product card into view.</p>
+                <button data-demo="card" class="demo-button mt-4 w-full border border-cyan-500 rounded-lg p-2">View Demo</button>
+            </article>
+
+        </div>
+
+        <div class="text-center mt-7">
+            <button id="replayDemos"
+                class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-xl">
+                ↻ Replay All GSAP Demos
+            </button>
+
+            <p id="demoMessage" class="text-sm text-purple-600 dark:text-purple-300 mt-4">
+                Choose a demo to see the coffee animations.
+            </p>
+        </div>
+
+    </div>
+</section>
