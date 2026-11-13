@@ -9,8 +9,8 @@
             My Coffee Shop Project
         </h2>
 
-        <p class="text-center text-gray-600 dark:text-gray-400 mt-3 mb-8">
-           
+        <p class="text-center text-gray-600 dark:text-gray-400 mt-3 mb-5">
+            Scroll through this section to scrub the product animation.
         </p>
 
         <div id="coffeeDemoCard"
@@ -81,9 +81,9 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
 
             <article class="demo-card p-5 rounded-xl bg-white dark:bg-slate-900 border border-purple-300">
-                <h3 class="font-bold text-purple-600">1. ScrollTrigger</h3>
-                <p class="text-sm mt-2 text-gray-500">Reveal the coffee product while scrolling.</p>
-                <button data-demo="scroll" class="demo-button mt-4 w-full border border-purple-500 rounded-lg p-2">View Demo</button>
+                <h3 class="font-bold text-purple-600">1. Scroll Scrub</h3>
+                <p class="text-sm mt-2 text-gray-500">Control the product animation by scrolling.</p>
+                <button data-demo="scrub" class="demo-button mt-4 w-full border border-purple-500 rounded-lg p-2">View Demo</button>
             </article>
 
             <article class="demo-card p-5 rounded-xl bg-white dark:bg-slate-900 border border-violet-300">
@@ -131,3 +131,252 @@
 
     </div>
 </section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const productCard = document.querySelector<HTMLElement>("#coffeeDemoCard");
+    const coffeeCup = document.querySelector<HTMLElement>("#coffeeCup");
+    const coffeeName = document.querySelector<HTMLElement>("#coffeeName");
+    const coffeePrice = document.querySelector<HTMLElement>("#coffeePrice");
+    const addToCartButton =
+        document.querySelector<HTMLButtonElement>("#coffeeDemoButton");
+    const demoMessage = document.querySelector<HTMLElement>("#demoMessage");
+    const coffeeSection = document.querySelector<HTMLElement>("#coffee");
+    if (!prefersReducedMotion && coffeeSection) {
+        const scrubTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: coffeeSection,
+                start: "top 75%",
+                end: "bottom 25%",
+                scrub: 0.6,
+            },
+        });
+
+        if (productCard) {
+            scrubTimeline.fromTo(
+                productCard,
+                { y: 72, scale: 0.9 },
+                { y: 0, scale: 1, ease: "none" },
+                0,
+            );
+        }
+        if (coffeeCup) {
+            scrubTimeline.fromTo(
+                coffeeCup,
+                { y: 28, rotation: -12, scale: 0.85 },
+                { y: -28, rotation: 12, scale: 1.08, ease: "none" },
+                0,
+            );
+        }
+        if (coffeeName) {
+            scrubTimeline.fromTo(
+                coffeeName,
+                { x: -32, autoAlpha: 0.55 },
+                { x: 0, autoAlpha: 1, ease: "none" },
+                0,
+            );
+        }
+        if (coffeePrice) {
+            scrubTimeline.fromTo(
+                coffeePrice,
+                { x: 32, autoAlpha: 0.55 },
+                { x: 0, autoAlpha: 1, ease: "none" },
+                0,
+            );
+        }
+    }
+
+    if (!prefersReducedMotion) {
+        document.querySelectorAll<HTMLElement>(".demo-card").forEach((card) => {
+            gsap.fromTo(
+                card,
+                { autoAlpha: 0, y: 24 },
+                {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.6,
+                    ease: "power2.out",
+                    scrollTrigger: { trigger: card, start: "top 90%", once: true },
+                },
+            );
+        });
+    }
+
+    const playDemo = (demo: string) => {
+        if (prefersReducedMotion) {
+            if (demoMessage) {
+                demoMessage.textContent =
+                    "Animations are disabled because reduced motion is enabled.";
+            }
+            return;
+        }
+
+        switch (demo) {
+            case "scrub":
+                coffeeSection?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+                if (demoMessage) {
+                    demoMessage.textContent =
+                        "Scroll through the coffee section to control the animation.";
+                }
+                break;
+            case "scroll":
+                if (productCard) {
+                    gsap.fromTo(
+                        productCard,
+                        { autoAlpha: 0, y: 36 },
+                        {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: productCard,
+                                start: "top 80%",
+                                once: true,
+                            },
+                        },
+                    );
+                    productCard.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                    });
+                }
+                break;
+            case "text":
+                if (coffeeName) {
+                    gsap.fromTo(
+                        coffeeName,
+                        { autoAlpha: 0, y: 20 },
+                        { autoAlpha: 1, y: 0, duration: 0.7, ease: "back.out(1.7)" },
+                    );
+                }
+                break;
+            case "bounce":
+                if (coffeeCup) {
+                    gsap.fromTo(
+                        coffeeCup,
+                        { y: -36, scale: 0.85 },
+                        { y: 0, scale: 1, duration: 0.9, ease: "bounce.out" },
+                    );
+                }
+                break;
+            case "price":
+                if (coffeePrice) {
+                    gsap.fromTo(
+                        coffeePrice,
+                        { scale: 0.8, color: "#ec4899" },
+                        {
+                            scale: 1,
+                            color: "#9333ea",
+                            duration: 0.7,
+                            ease: "elastic.out(1, 0.4)",
+                        },
+                    );
+                }
+                break;
+            case "button":
+                if (addToCartButton) {
+                    gsap.fromTo(
+                        addToCartButton,
+                        { scale: 0.94 },
+                        { scale: 1, duration: 0.45, ease: "elastic.out(1, 0.4)" },
+                    );
+                }
+                break;
+            case "card":
+                if (productCard) {
+                    gsap.fromTo(
+                        productCard,
+                        { autoAlpha: 0, x: -48 },
+                        { autoAlpha: 1, x: 0, duration: 0.7, ease: "power2.out" },
+                    );
+                }
+                break;
+        }
+
+        if (demoMessage) {
+            demoMessage.textContent = `Playing ${demo} animation.`;
+        }
+    };
+
+    document.querySelectorAll<HTMLButtonElement>(".demo-button").forEach((button) => {
+        button.addEventListener("click", () => {
+            const demo = button.dataset.demo;
+            if (demo) playDemo(demo);
+        });
+    });
+
+    document
+        .querySelector<HTMLButtonElement>("#coffeeAnimation")
+        ?.addEventListener("click", () => playDemo("bounce"));
+    document
+        .querySelector<HTMLButtonElement>("#coffeePriceAnimation")
+        ?.addEventListener("click", () => playDemo("price"));
+
+    const replayAnimations = () => {
+        if (prefersReducedMotion) {
+            playDemo("replay");
+            return;
+        }
+
+        const timeline = gsap.timeline();
+        if (productCard) {
+            timeline.fromTo(
+                productCard,
+                { autoAlpha: 0, y: 30 },
+                { autoAlpha: 1, y: 0, duration: 0.65, ease: "power2.out" },
+            );
+        }
+        if (coffeeCup) {
+            timeline.fromTo(
+                coffeeCup,
+                { y: -32, scale: 0.85 },
+                { y: 0, scale: 1, duration: 0.8, ease: "bounce.out" },
+                "-=0.2",
+            );
+        }
+        if (coffeeName) {
+            timeline.fromTo(
+                coffeeName,
+                { autoAlpha: 0, y: 16 },
+                { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" },
+                "-=0.35",
+            );
+        }
+        if (coffeePrice) {
+            timeline.fromTo(
+                coffeePrice,
+                { scale: 0.85 },
+                { scale: 1, duration: 0.45, ease: "back.out(2)" },
+                "-=0.2",
+            );
+        }
+        if (addToCartButton) {
+            timeline.fromTo(
+                addToCartButton,
+                { scale: 0.96 },
+                { scale: 1, duration: 0.4, ease: "back.out(2)" },
+                "-=0.2",
+            );
+        }
+
+        if (demoMessage) demoMessage.textContent = "Playing all animations.";
+    };
+
+    document
+        .querySelector<HTMLButtonElement>("#coffeeReplay")
+        ?.addEventListener("click", replayAnimations);
+    document
+        .querySelector<HTMLButtonElement>("#replayDemos")
+        ?.addEventListener("click", replayAnimations);
+</script>
